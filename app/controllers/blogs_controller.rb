@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:edit, :update]
+  before_action :set_blog, only: [:edit, :update, :destroy]
   def index
     @blogs = Blog.all
   end
@@ -23,8 +23,11 @@ class BlogsController < ApplicationController
       render :edit
     end
   end
-
-  private
+  def destroy
+    @blog.destroy
+    redirect_to blogs_path, notice:"ツイートを削除しました！"
+  end
+private
   def blog_params
     params.require(:blog).permit(:title, :content)
   end
