@@ -7,11 +7,15 @@ class BlogsController < ApplicationController
     @blog = Blog.new
   end
   def create
-  @blog = Blog.new(blog_params)
-    if @blog.save
-      redirect_to blogs_path, notice: "ツイートしました！"
-    else
+    @blog = Blog.new(blog_params)
+    if params[:back]
       render :new
+    else
+      if @blog.save
+        redirect_to blogs_path, notice: "ツイートを作成しました！"
+      else
+        render :new
+      end
     end
   end
   def edit
@@ -26,6 +30,10 @@ class BlogsController < ApplicationController
   def destroy
     @blog.destroy
     redirect_to blogs_path, notice:"ツイートを削除しました！"
+  end
+  def confirm
+    @blog = Blog.new(blog_params)
+    render :new if @blog.invalid?
   end
 private
   def blog_params
