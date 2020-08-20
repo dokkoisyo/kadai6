@@ -3,10 +3,16 @@ class BlogsController < ApplicationController
     @blog = Blog.new
   end
   def create
-    Blog.create(blog_params)
-    redirect_to new_blog_path
-    gitnindex
+  @blog = Blog.new(blog_params)
+    if @blog.save
+      redirect_to blogs_path, notice: "ツイートしました！"
+    else
+      render :new
+    end
+  end
+  def index
     @blogs = Blog.all
+  end
   private
   def blog_params
     params.require(:blog).permit(:title, :content)
