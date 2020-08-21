@@ -8,8 +8,20 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <div class="container">
+      <header class="header">
+        <nav>
+          <ul class="top_menu clearfix">
+            <li><%= link_to '新しくツイートする', new_blog_path %></li>
+            <li><%= link_to "ブログ一覧", blogs_path %></li>
+          </ul>
+        </nav>
+      </header>
+      <%= yield %>
+    </div>
+    <footer class="footer">
+      <p>Copyright © 2018 DIVE INC All RIGHTS RESERVED.</p>
+    </footer>
   </body>
 </html>
